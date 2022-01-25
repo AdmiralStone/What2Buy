@@ -1,13 +1,19 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"What2Buy/Server/handler"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
 	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	r.GET("/ping", handler.PingHandler)
+
+	r.GET("/getItems", handler.GetItems)
+	r.POST("/addItem", handler.AddItem)
+	r.POST("/upvoteItem", handler.UpvoteItem)
+	r.DELETE("/deleteItem", handler.DeleteItem)
+
 	r.Run() // listen and serve on localhost:8080
 }
